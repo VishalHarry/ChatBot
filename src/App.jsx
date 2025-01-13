@@ -1,10 +1,16 @@
 import React from 'react'
+import SideBar from './components/SideBar'
+import ChatSection from './components/ChatSection'
+
 
 function App() {
   return (
-    <div className='bg-red-500'>
-      hii vishal
-    </div>
+    < >
+   <div className='flex'>
+   <SideBar/>
+   <ChatSection/>
+   </div>
+    </>
   )
 }
 
