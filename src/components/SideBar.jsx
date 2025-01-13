@@ -1,30 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { HiPlus } from 'react-icons/hi';
 import { MdMessage } from 'react-icons/md';
+import Sapneration from './Sapneration';
 
 function SideBar() {
-    return (
-        <div className="bg-gray-800 text-white h-screen p-4 flex flex-col items-start space-y-6 w-[13%]">
-            {/* Hamburger Icon */}
-            <div>
-                <FaBars className="text-2xl cursor-pointer hover:text-gray-400 ml-2" />
-            </div>
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-            {/* New Chat Section */}
-            <div className="flex items-center space-x-2 p-2 rounded-md bg-gray-600 hover:bg-gray-700 cursor-pointer">
-                <HiPlus className="text-2xl text-white" />
-                <p className="text-md text-white">New Chat</p>
-            </div>
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
+  return (
+  
+    <div
+      className={`bg-gray-800 text-white dark:bg-gray-200 dark:text-black h-screen p-4 flex flex-col items-start space-y-6 transition-all duration-200 ${
+        isCollapsed ? 'w-[5%]' : 'w-[13%]'
+      }`}
+    >
+      {/* Hamburger Icon */}
+      <div>
+        <FaBars
+          className="text-2xl cursor-pointer hover:text-gray-400 dark:hover:text-gray-800  ml-2"
+          onClick={toggleSidebar}
+        />
+      </div>
 
-            {/* Message Section */}
-            <div className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-700 cursor-pointer">
-                <MdMessage className="text-2xl" />
-                <p className="text-md">Hi Vishal</p>
-            </div>
-        </div>
-    );
+      {/* New Chat Section */}
+      <div
+        className={`flex items-center dark:text-black ${
+          isCollapsed ? 'justify-center' : 'space-x-2'
+        } p-2 rounded-md bg-gray-600 text-white dark:bg-gray-400   hover:bg-gray-700 dark:hover:bg-gray-500 cursor-pointer`}
+      >
+        <HiPlus
+          className={`text-2xl text-white transition-all duration-300 ${
+            isCollapsed ? 'rounded-full p-1 bg-gray-700' : ''
+          }`}
+        />
+        {!isCollapsed && <p className="text-md text-white dark:text-black">New Chat</p>}
+      </div>
+
+      {/* Message Section */}
+      <div
+        className={`flex items-center ${
+          isCollapsed ? 'justify-center' : 'space-x-2'
+        } p-2 rounded-md hover:bg-gray-700 cursor-pointer`}
+      >
+        <MdMessage className="text-2xl" />
+        {!isCollapsed && <p className="text-md dark:text-black">Hi Vishal</p>}
+      </div>
+    
+    </div>
+    
+  );
 }
 
 export default SideBar;

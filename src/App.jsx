@@ -1,6 +1,7 @@
 import React from 'react'
 import SideBar from './components/SideBar'
 import ChatSection from './components/ChatSection'
+import Sapneration from './components/Sapneration'
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     < >
    <div className='flex'>
    <SideBar/>
+   <Sapneration/>
    <ChatSection/>
    </div>
     </>
