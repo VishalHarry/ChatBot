@@ -5,6 +5,8 @@ import img from '../assets/img 1.webp';
 import img1 from '../assets/ai.png';
 import img2 from '../assets/user.webp';
 import { datacontext } from './context/Usercontext';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 function ChatSection() {
   let { send, input, setInput, showResult, resultData, resentPrompt, loading } = useContext(datacontext);
@@ -46,7 +48,53 @@ function ChatSection() {
                   <hr className="animate-gradient w-full animate-delay-2" />
                 </div>
               ) : (
-                <p className="text-base md:text-lg break-words">{resultData}</p>
+                <div className="space-y-4">
+                {Array.isArray(resultData) && resultData.length > 0 ? (
+                  resultData.map((part, index) => {
+                    // Check if the part is a code block (triple backticks)
+                    if (part.startsWith('```') && part.endsWith('```')) {
+                      const codeContent = part.slice(3, -3).trim(); // Remove the backticks
+                      return (
+                        <SyntaxHighlighter
+                          key={index}
+                          language="javascript"
+                          style={dark}
+                          className="overflow-x-auto rounded-md"
+                        >
+                          {codeContent}
+                        </SyntaxHighlighter>
+                      );
+                    } else if (part.startsWith('-')) {
+                      // Render as list item
+                      return (
+                        <li key={index} className="text-base md:text-lg break-words list-disc ml-5">
+                          {part.slice(1).trim()}
+                        </li>
+                      );
+                    } else if (part.startsWith('*')) {
+                      // Render as bold text
+                      return (
+                        <p key={index} className="text-base md:text-lg break-words font-bold">
+                          {part.slice(1).trim()}
+                        </p>
+                      );
+                    } else {
+                      // Render as normal paragraph
+                      return (
+                        <p key={index} className="text-base md:text-lg break-words">
+                          {part.trim()}
+                        </p>
+                      );
+                    }
+                  })
+                ) : (
+                  <p className="text-base md:text-lg break-words italic text-gray-500">
+                    No content to display.
+                  </p>
+                )}
+              </div>
+
+
               )}
 
             </div>
