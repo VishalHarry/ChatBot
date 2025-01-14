@@ -11,3 +11,30 @@
     padding: 0;
     font-family: "Poppins", serif;
 }
+/* Define the keyframe for the gradient animation */
+@keyframes gradientMove {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+/* Apply the gradient and animation on the hr lines */
+.animate-gradient {
+  height: 10px; /* Line height */
+  width: 100%; /* Full width */
+  background: linear-gradient(90deg, #d1d5db 0%, #6b7280 50%, #d1d5db 100%);
+  background-size: 200% 100%; /* Adjust the gradient to be wider than the line */
+  animation: gradientMove 2s linear infinite; /* Animation to move the gradient */
+  border: none; /* Remove default border for hr */
+}
+
+.animate-delay {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.6s;
+}

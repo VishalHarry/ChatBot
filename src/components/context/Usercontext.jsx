@@ -8,12 +8,17 @@ function Usercontext(props) {
   const[showResult,setShowResult]=useState(false)
   const[loading,setLoading]=useState(false)
   const[resultData,setResultData]=useState("")
+  const[resentPrompt,setResentPrompt]=useState("");
 
  async  function send(prompt){
+  setResultData("")
   setShowResult(true);
+  setResentPrompt(input)
   setLoading(true);
   const response= await run(prompt)
-  setResultData(response)
+  setResultData(response.split("**")&&response.split("*"))
+  setInput("")
+  setLoading(false);
   }
   const data={
     input,
@@ -24,7 +29,8 @@ function Usercontext(props) {
     showResult,
     setShowResult,
     resultData,
-    setResultData
+    setResultData,
+    resentPrompt
   }
   return (
     <div>

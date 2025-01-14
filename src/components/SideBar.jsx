@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { HiPlus } from 'react-icons/hi';
 import { MdMessage } from 'react-icons/md';
 import Sapneration from './Sapneration';
+import { datacontext } from './context/Usercontext';
 
 function SideBar() {
+  let { send, input, setInput, showResult, resultData, resentPrompt, loading } = useContext(datacontext);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -44,10 +46,10 @@ function SideBar() {
       <div
         className={`flex items-center ${
           isCollapsed ? 'justify-center' : 'space-x-2'
-        } p-2 rounded-md hover:bg-gray-700 cursor-pointer`}
+        } p-2 rounded-md hover:bg-gray-700 cursor-pointer dark:hover:bg-gray-400`}
       >
         <MdMessage className="text-2xl" />
-        {!isCollapsed && <p className="text-md dark:text-black">Hi Vishal</p>}
+        {!isCollapsed && <p className="text-md dark:text-black ">{resentPrompt}</p>}
       </div>
     
     </div>

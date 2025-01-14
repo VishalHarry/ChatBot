@@ -7,7 +7,7 @@ import img2 from '../assets/user.webp';
 import { datacontext } from './context/Usercontext';
 
 function ChatSection() {
-  let { send, input, setInput, showResult, resultData } = useContext(datacontext);
+  let { send, input, setInput, showResult, resultData, resentPrompt, loading } = useContext(datacontext);
 
   return (
     <div className="flex flex-col bg-gray-900 text-white dark:bg-gray-100 dark:text-black h-screen w-full max-w-8xl mx-auto">
@@ -32,13 +32,23 @@ function ChatSection() {
             {/* User Message */}
             <div className="flex items-start gap-3 p-4  rounded-lg shadow ">
               <img src={img2} alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
-              <p className="text-base md:text-lg break-words">{input}</p>
+              <p className="text-base md:text-lg break-words">{resentPrompt}</p>
             </div>
 
             {/* AI Response */}
             <div className="flex items-start gap-3 p-4  rounded-lg shadow ">
               <img src={img1} alt="AI Avatar" className="w-12 h-12 rounded-full object-cover" />
-              <p className="text-base md:text-lg break-words">{resultData}</p>
+              {loading ? (
+                <div className="w-full flex flex-col gap-5">
+                  {/* Three animated lines */}
+                  <hr className="animate-gradient w-full mb-2" />
+                  <hr className="animate-gradient w-full animate-delay" />
+                  <hr className="animate-gradient w-full animate-delay-2" />
+                </div>
+              ) : (
+                <p className="text-base md:text-lg break-words">{resultData}</p>
+              )}
+
             </div>
           </div>
         )}
