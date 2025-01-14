@@ -10,12 +10,21 @@ function Usercontext(props) {
   const[resultData,setResultData]=useState("")
 
  async  function send(prompt){
-   await run(prompt)
+  setShowResult(true);
+  setLoading(true);
+  const response= await run(prompt)
+  setResultData(response)
   }
   const data={
     input,
     setInput,
-    send
+    send,
+    loading,
+    setLoading,
+    showResult,
+    setShowResult,
+    resultData,
+    setResultData
   }
   return (
     <div>
